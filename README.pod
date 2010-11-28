@@ -46,7 +46,7 @@ string.
     quux
     >>c<<org>>e<<
 
-=head1 full-line
+=head1 full-line [l]
 
 This makes highlight always highlight full lines of input, even when
 the full line is not matched.
