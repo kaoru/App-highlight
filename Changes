@@ -1,3 +1,7 @@
+--- 0.02 (29/11/2010) --
+    * added the --one-color parameter
+    * more tests
+
 --- 0.01 (28/11/2010) ---
     * basic highlight functionality
     * --no-escape
