@@ -1,4 +1,8 @@
---- 0.02 (29/11/2010) --
+--- 0.03 (2/12/2010) ---
+    * added explicit module versions to combat failing test
+    http://www.cpantesters.org/cpan/report/c52b1b66-fd4f-11df-94a1-c5f5cbcffce0
+
+--- 0.02 (29/11/2010) ---
     * added the --one-color parameter
     * more tests
 
