@@ -14,9 +14,10 @@ my $RESET = RESET;
 
 sub opt_spec {
     return (
-        [ 'no-escape|n' => "don't auto-escape input"            ],
-        [ 'full-line|l' => "highlight the whole matched line"   ],
-        [ 'one-color|o' => "use only one color for all matches" ],
+        [ 'color|c!'    => "use terminal color for highlighting (default)" ],
+        [ 'escape|e!'   => "auto-escape input (default)"                   ],
+        [ 'full-line|l' => "highlight the whole matched line"              ],
+        [ 'one-color|o' => "use only one color for all matches"            ],
     );
 }
 
@@ -38,7 +39,7 @@ sub execute {
 
     my @matches = (".+");
     if (scalar @$args) {
-        if (!$opt->{'no_escape'}) {
+        if (!exists($opt->{'escape'}) || $opt->{'escape'}) {
             @$args = map { "\Q$_" } @$args;
         }
         @matches = @$args;
