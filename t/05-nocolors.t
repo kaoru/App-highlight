@@ -4,7 +4,7 @@ use warnings;
 use File::Basename;
 use lib dirname(__FILE__);
 
-use Test::More tests => 30;
+use Test::More tests => 29;
 use App::Cmd::Tester;
 use Test::AppHighlightWords;
 
@@ -60,7 +60,6 @@ use App::highlight;
     like($result->stdout, qr/^xyzzy$/ms,                'xyzzy - no match for "a" "o"');
     like($result->stdout, qr/^thud$/ms,                 'thud - no match for "a" "o"' );
 
-    is($result->stderr, '', 'nothing sent to sderr');
     is($result->error, undef, 'threw no exceptions');
 
     restore_stdin();

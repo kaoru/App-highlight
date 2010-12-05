@@ -4,7 +4,7 @@ use warnings;
 use File::Basename;
 use lib dirname(__FILE__);
 
-use Test::More tests => 30;
+use Test::More tests => 28;
 use App::Cmd::Tester;
 use Test::AppHighlightWords;
 
@@ -24,13 +24,12 @@ use App::highlight;
     like($result->stdout, qr/^c.+o.+rge$/ms,                'corge - matched "a" "o"'     );
     like($result->stdout, qr/^gr.+a.+ult$/ms,               'grault - matched "a" "o"'    );
     like($result->stdout, qr/^g.+a.+rply$/ms,               'garply - matched "a" "o"'    );
-    like($result->stdout, qr/^w(.+)a(.+)ld(?!\1).+o\2$/ms,  'waldo - no match for "a" "o"');
+    like($result->stdout, qr/^w(.+)a(.+)ld(?!\1).+o.+$/ms,  'waldo - no match for "a" "o"');
     like($result->stdout, qr/^fred$/ms,                     'fred - no match for "a" "o"' );
     like($result->stdout, qr/^plugh$/ms,                    'plugh - no match for "a" "o"');
     like($result->stdout, qr/^xyzzy$/ms,                    'xyzzy - no match for "a" "o"');
     like($result->stdout, qr/^thud$/ms,                     'thud - no match for "a" "o"' );
 
-    is($result->stderr, '', 'nothing sent to sderr');
     is($result->error, undef, 'threw no exceptions');
 
     restore_stdin();
@@ -56,7 +55,6 @@ use App::highlight;
     like($result->stdout, qr/^xyzzy$/ms,              'xyzzy - no match for "a" "o" (one-color mode)');
     like($result->stdout, qr/^thud$/ms,               'thud - no match for "a" "o" (one-color mode)' );
 
-    is($result->stderr, '', 'nothing sent to sderr');
     is($result->error, undef, 'threw no exceptions');
 
     restore_stdin();

@@ -4,7 +4,7 @@ use warnings;
 use File::Basename;
 use lib dirname(__FILE__);
 
-use Test::More tests => 45;
+use Test::More tests => 42;
 use App::Cmd::Tester;
 use Test::AppHighlightWords;
 
@@ -30,7 +30,6 @@ use App::highlight;
     like($result->stdout, qr/^xyzzy$/ms,    'xyzzy - no match for "[abcde]+" (default = escape)' );
     like($result->stdout, qr/^thud$/ms,     'thud - no match for "[abcde]+" (default = escape)'  );
 
-    is($result->stderr, '', 'nothing sent to sderr');
     is($result->error, undef, 'threw no exceptions');
 
     restore_stdin();
@@ -56,7 +55,6 @@ use App::highlight;
     like($result->stdout, qr/^xyzzy$/ms,    'xyzzy - no match for "[abcde]+" (default = escape)' );
     like($result->stdout, qr/^thud$/ms,     'thud - no match for "[abcde]+" (default = escape)'  );
 
-    is($result->stderr, '', 'nothing sent to sderr');
     is($result->error, undef, 'threw no exceptions');
 
     restore_stdin();
@@ -82,7 +80,6 @@ use App::highlight;
     like($result->stdout, qr/^xyzzy$/ms,         'xyzzy - no match for "[abcde]+" (no-escape mode)');
     like($result->stdout, qr/^thu.+d.+$/ms,      'thud - match for "[abcde]+" (no-escape mode)'    );
 
-    is($result->stderr, '', 'nothing sent to sderr');
     is($result->error, undef, 'threw no exceptions');
 
     restore_stdin();

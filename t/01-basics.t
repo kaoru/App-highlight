@@ -4,7 +4,7 @@ use warnings;
 use File::Basename;
 use lib dirname(__FILE__);
 
-use Test::More tests => 45;
+use Test::More tests => 42;
 use App::Cmd::Tester;
 use Test::AppHighlightWords;
 
@@ -30,7 +30,6 @@ use App::highlight;
     like($result->stdout, qr/^xyzzy$/ms,    'xyzzy - no match for "ba"' );
     like($result->stdout, qr/^thud$/ms,     'thud - no match for "ba"'  );
 
-    is($result->stderr, '', 'nothing sent to sderr');
     is($result->error, undef, 'threw no exceptions');
 
     restore_stdin();
@@ -56,7 +55,6 @@ use App::highlight;
     like($result->stdout, qr/^xyzzy$/ms,    'xyzzy - no match for "ba" "q"' );
     like($result->stdout, qr/^thud$/ms,     'thud - no match for "ba" "q"'  );
 
-    is($result->stderr, '', 'nothing sent to sderr');
     is($result->error, undef, 'threw no exceptions');
 
     restore_stdin();
@@ -82,7 +80,6 @@ use App::highlight;
     like($result->stdout, qr/^x.+y.+zz.+y.+$/ms, 'xyzzy - matched "ba" "q" "y"'      );
     like($result->stdout, qr/^thud$/ms,          'thud - no match for "ba" "q" "y"'  );
 
-    is($result->stderr, '', 'nothing sent to sderr');
     is($result->error, undef, 'threw no exceptions');
 
     restore_stdin();
