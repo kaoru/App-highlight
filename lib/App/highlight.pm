@@ -4,7 +4,20 @@ use warnings;
 package App::highlight;
 use base 'App::Cmd::Simple';
 
-use Term::ANSIColor ':constants';
+use Try::Tiny;
+use Module::Load qw(load);
+
+my $COLOR_SUPPORT = 1;
+my @COLORS;
+try {
+    load('Term::ANSIColor', 'color');
+    @COLORS = map { [ color("bold $_"), color('reset') ] } (
+        qw(red green yellow blue magenta cyan)
+    );
+}
+catch {
+    $COLOR_SUPPORT = 0;
+};
 
 my @NOCOLORS = (
     [ '<<', '>>' ],
@@ -13,10 +26,6 @@ my @NOCOLORS = (
     [ '{{', '}}' ],
     [ '**', '**' ],
     [ '__', '__' ],
-);
-
-my @COLORS = map { [ (BOLD $_), RESET ] } (
-    RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN
 );
 
 sub opt_spec {
@@ -55,11 +64,17 @@ sub execute {
     }
 
     my @HIGHLIGHTS;
-    if ($opt->{'color'} || !$opt->{'nocolor'}) {
+    if ($COLOR_SUPPORT &&
+        ($opt->{'color'} || !$opt->{'nocolor'})) {
         @HIGHLIGHTS = @COLORS;
     }
     else {
         @HIGHLIGHTS = @NOCOLORS;
+    }
+
+    if (!$COLOR_SUPPORT &&
+        ($opt->{'color'} || !$opt->{'nocolor'})) {
+        warn "Color support disabled. Install Term::ANSIColor to enable it.\n";
     }
 
     if ($opt->{'one_color'}) {
@@ -133,10 +148,33 @@ a different color.
     [[qu]]ux
     corge
 
-Note that brackets are not used to highlight the words, Term::ANSIColor
-terminal highlighting is used.
+If you have Term::ANSIColor installed then the strings will be highlighted
+using terminal colors rather than using brackets. This is highly reccommended
+as it makes the output much more useful.
 
 =head1 OPTIONS
+
+=head1 color / c
+
+This is the default if Term::ANSIColor is installed.
+
+App::highlight will cycle through the colours:
+
+    red green yellow blue magenta cyan
+
+If you do not have Term::ANSIColor installed and you specify --color or you do
+not specify --no-color then you will receive a warning.
+
+=head1 no-color
+
+This is the default if Term::ANSIColor is not installed.
+
+App::highlight will cycle through the brackets:
+
+    <<match>> [[match]] ((match))  {{match}} **match** __match__
+
+The examples in the rest of this document use this mode because showing color
+highlighting in POD documentation is not possible.
 
 =head1 escape / e
 
@@ -184,6 +222,9 @@ more efficient.
 
 Rather than cycling through multiple colors, this makes highlight always use
 the same color for all highlights.
+
+Despite the name "one-color" this interacts with the --no-color option as you
+would expect.
 
     % cat words.txt | highlight --one-color ba qu
     foo
