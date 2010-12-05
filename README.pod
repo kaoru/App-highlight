@@ -39,13 +39,16 @@ a different color.
     [[qu]]ux
     corge
 
+=head1 Color Support
+
 If you have Term::ANSIColor installed then the strings will be highlighted
-using terminal colors rather than using brackets. This is highly reccommended
-as it makes the output much more useful.
+using terminal colors rather than using brackets.
+
+Installing color support by installing Term::ANSIColor is highly reccommended.
 
 =head1 OPTIONS
 
-=head1 color / c
+=head2 color / c
 
 This is the default if Term::ANSIColor is installed.
 
@@ -56,7 +59,7 @@ App::highlight will cycle through the colours:
 If you do not have Term::ANSIColor installed and you specify --color or you do
 not specify --no-color then you will receive a warning.
 
-=head1 no-color
+=head2 no-color
 
 This is the default if Term::ANSIColor is not installed.
 
@@ -67,7 +70,7 @@ App::highlight will cycle through the brackets:
 The examples in the rest of this document use this mode because showing color
 highlighting in POD documentation is not possible.
 
-=head1 escape / e
+=head2 escape / e
 
 This is the default and means that the strings passed in will be escaped so
 that no special characters exist.
@@ -80,7 +83,7 @@ that no special characters exist.
     quux
     <<c>>org<<e>>
 
-=head1 noescape / no-escape / n / regex / r
+=head2 noescape / no-escape / n / regex / r
 
 This allows you to specify a regular expression instead of a simple
 string.
@@ -93,7 +96,7 @@ string.
     [[q]][[u]][[u]][[x]]
     corge
 
-=head1 full-line [l]
+=head2 full-line [l]
 
 This makes highlight always highlight full lines of input, even when
 the full line is not matched.
@@ -109,7 +112,7 @@ the full line is not matched.
 Note this is similar to '--no-escape "^.*match.*$"' but probably much
 more efficient.
 
-=head1 one-color [o]
+=head2 one-color [o]
 
 Rather than cycling through multiple colors, this makes highlight always use
 the same color for all highlights.
