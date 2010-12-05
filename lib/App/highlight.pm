@@ -6,11 +6,18 @@ use base 'App::Cmd::Simple';
 
 use Term::ANSIColor ':constants';
 
-my @COLORS = map { BOLD $_ } (
-    RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN
+my @NOCOLORS = (
+    [ '<<', '>>' ],
+    [ '[[', ']]' ],
+    [ '((', '))' ],
+    [ '{{', '}}' ],
+    [ '**', '**' ],
+    [ '__', '__' ],
 );
 
-my $RESET = RESET;
+my @COLORS = map { [ (BOLD $_), RESET ] } (
+    RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN
+);
 
 sub opt_spec {
     return (
@@ -39,7 +46,7 @@ sub validate_args {
 sub execute {
     my ($self, $opt, $args) = @_;
 
-    my @matches = (".+");
+    my @matches;
     if (scalar @$args) {
         if ($opt->{'escape'} || !$opt->{'noescape'}) {
             @$args = map { "\Q$_" } @$args;
@@ -47,10 +54,16 @@ sub execute {
         @matches = @$args;
     }
 
-    my @COLORS = @COLORS;
-    my $RESET  = $RESET;
+    my @HIGHLIGHTS;
+    if ($opt->{'color'} || !$opt->{'nocolor'}) {
+        @HIGHLIGHTS = @COLORS;
+    }
+    else {
+        @HIGHLIGHTS = @NOCOLORS;
+    }
+
     if ($opt->{'one_color'}) {
-        @COLORS = (BOLD RED);
+        @HIGHLIGHTS = ($HIGHLIGHTS[0]);
     }
 
     while (<STDIN>) {
@@ -58,16 +71,16 @@ sub execute {
         foreach my $m (@matches) {
             if ($opt->{'full_line'}) {
                 if (m/$m/) {
-                    s/^/$COLORS[$i]/;
-                    s/$/$RESET/;
+                    s/^/$HIGHLIGHTS[$i][0]/;
+                    s/$/$HIGHLIGHTS[$i][1]/;
                 }
             }
             else {
-                s/($m)/$COLORS[$i] . $1 . $RESET/ge;
+                s/($m)/$HIGHLIGHTS[$i][0] . $1 . $HIGHLIGHTS[$i][1]/ge;
             }
 
             $i++;
-            $i %= @COLORS;
+            $i %= @HIGHLIGHTS;
         }
         print;
     }
