@@ -96,7 +96,7 @@ string.
     [[q]][[u]][[u]][[x]]
     corge
 
-=head2 full-line [l]
+=head2 full-line / l
 
 This makes highlight always highlight full lines of input, even when
 the full line is not matched.
@@ -112,7 +112,7 @@ the full line is not matched.
 Note this is similar to '--no-escape "^.*match.*$"' but probably much
 more efficient.
 
-=head2 one-color [o]
+=head2 one-color / o
 
 Rather than cycling through multiple colors, this makes highlight always use
 the same color for all highlights.
@@ -127,6 +127,12 @@ would expect.
     <<qu>>x
     <<qu>>ux
     corge
+
+=head2 help / h
+
+Show a brief help message
+
+    % highlight --help
 
 =head1 Copyright
 
