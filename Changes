@@ -1,3 +1,10 @@
+--- 0.04 (5/12/2010) ---
+    * added support for --no-color
+    * made --no-color the default when Term::ANSIColor is not installed
+    * removed Term::ANSIColor as a required module
+    * changed --color and --escape parameters to allow positive and negative forms
+    * split tests up into smaller files
+
 --- 0.03 (2/12/2010) ---
     * added explicit module versions to combat failing test
     http://www.cpantesters.org/cpan/report/c52b1b66-fd4f-11df-94a1-c5f5cbcffce0
