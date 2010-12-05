@@ -14,10 +14,12 @@ my $RESET = RESET;
 
 sub opt_spec {
     return (
-        [ 'color|c!'    => "use terminal color for highlighting (default)" ],
-        [ 'escape|e!'   => "auto-escape input (default)"                   ],
-        [ 'full-line|l' => "highlight the whole matched line"              ],
-        [ 'one-color|o' => "use only one color for all matches"            ],
+        [ 'color|c'                         => "use terminal color for highlighting (default)" ],
+        [ 'nocolor|no-color'                => "don't use terminal color"                      ],
+        [ 'escape|e'                        => "auto-escape input (default)"                   ],
+        [ 'noescape|no-escape|regex|n|r'    => "don't auto-escape input (regex mode)"          ],
+        [ 'full-line|l'                     => "highlight the whole matched line"              ],
+        [ 'one-color|o'                     => "use only one color for all matches"            ],
     );
 }
 
@@ -39,7 +41,7 @@ sub execute {
 
     my @matches = (".+");
     if (scalar @$args) {
-        if (!exists($opt->{'escape'}) || $opt->{'escape'}) {
+        if ($opt->{'escape'} || !$opt->{'noescape'}) {
             @$args = map { "\Q$_" } @$args;
         }
         @matches = @$args;
@@ -123,18 +125,31 @@ terminal highlighting is used.
 
 =head1 OPTIONS
 
-=head1 no-escape [n]
+=head1 escape / e
 
-This allows you to specify a regular expression instead of a simple
-string.
+This is the default and means that the strings passed in will be escaped so
+that no special characters exist.
 
-    % cat words.txt | highlight --no-escape '[abcde]+'
+    % cat words.txt | highlight --escape 'ba' '[qux]'
     foo
     >>ba<<r
     >>ba<<z
     qux
     quux
     >>c<<org>>e<<
+
+=head1 noescape / no-escape / n / regex / r
+
+This allows you to specify a regular expression instead of a simple
+string.
+
+    % cat words.txt | highlight --no-escape 'ba' '[qux]'
+    foo
+    >>ba<<r
+    >>ba<<z
+    [[q]][[u]][[x]]
+    [[q]][[u]][[u]][[x]]
+    corge
 
 =head1 full-line [l]
 
