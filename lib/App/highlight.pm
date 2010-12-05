@@ -6,6 +6,7 @@ use base 'App::Cmd::Simple';
 
 use Try::Tiny;
 use Module::Load qw(load);
+use Getopt::Long::Descriptive;
 
 my $COLOR_SUPPORT = 1;
 my @COLORS;
@@ -30,17 +31,35 @@ my @NOCOLORS = (
 
 sub opt_spec {
     return (
-        [ 'color|c'                         => "use terminal color for highlighting (default)" ],
-        [ 'nocolor|no-color'                => "don't use terminal color"                      ],
-        [ 'escape|e'                        => "auto-escape input (default)"                   ],
-        [ 'noescape|no-escape|regex|n|r'    => "don't auto-escape input (regex mode)"          ],
-        [ 'full-line|l'                     => "highlight the whole matched line"              ],
-        [ 'one-color|o'                     => "use only one color for all matches"            ],
+        [
+            one_of => [
+                [ 'color|c'          => "use terminal color for highlighting (default)" ],
+                [ 'nocolor|no-color' => "don't use terminal color"                      ],
+            ],
+        ],
+        [
+            one_of => [
+                [ 'escape|e'                     => "auto-escape input (default)"          ],
+                [ 'noescape|no-escape|regex|n|r' => "don't auto-escape input (regex mode)" ],
+            ]
+        ],
+        [ 'full-line|l' => "highlight the whole matched line"   ],
+        [ 'one-color|o' => "use only one color for all matches" ],
+        [ 'help|h'      => "display a usage message"            ],
     );
 }
 
 sub validate_args {
     my ($self, $opt, $args) = @_;
+
+    if ($opt->{'help'}) {
+        my ($opt, $usage) = describe_options(
+            $self->usage_desc(),
+            $self->opt_spec(),
+        );
+        print $usage;
+        exit;
+    }
 
     if (!@$args) {
         $self->usage_error(
