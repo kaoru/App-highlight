@@ -116,8 +116,8 @@ matched.
 
     % cat words.txt | highlight ba
     foo
-    >>ba<<r
-    >>ba<<z
+    <<ba>>r
+    <<ba>>z
     qux
     quux
     corge
@@ -127,8 +127,8 @@ a different color.
 
     % cat words.txt | highlight ba qu
     foo
-    >>ba<<r
-    >>ba<<z
+    <<ba>>r
+    <<ba>>z
     [[qu]]x
     [[qu]]ux
     corge
@@ -145,11 +145,11 @@ that no special characters exist.
 
     % cat words.txt | highlight --escape 'ba' '[qux]'
     foo
-    >>ba<<r
-    >>ba<<z
+    <<ba>>r
+    <<ba>>z
     qux
     quux
-    >>c<<org>>e<<
+    <<c>>org<<e>>
 
 =head1 noescape / no-escape / n / regex / r
 
@@ -158,8 +158,8 @@ string.
 
     % cat words.txt | highlight --no-escape 'ba' '[qux]'
     foo
-    >>ba<<r
-    >>ba<<z
+    <<ba>>r
+    <<ba>>z
     [[q]][[u]][[x]]
     [[q]][[u]][[u]][[x]]
     corge
@@ -173,8 +173,8 @@ the full line is not matched.
     foo
     bar
     baz
-    >>qux<<
-    >>quux<<
+    <<qux>>
+    <<quux>>
     corge
 
 Note this is similar to '--no-escape "^.*match.*$"' but probably much
@@ -187,10 +187,10 @@ the same color for all highlights.
 
     % cat words.txt | highlight --one-color ba qu
     foo
-    >>ba<<r
-    >>ba<<z
-    >>qu<<x
-    >>qu<<ux
+    <<ba>>r
+    <<ba>>z
+    <<qu>>x
+    <<qu>>ux
     corge
 
 =head1 Copyright
