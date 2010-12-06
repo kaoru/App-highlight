@@ -1,3 +1,6 @@
+--- 0.06 (6/12/2010) ---
+    * fixed typo in prerequisites
+
 --- 0.05 (5/12/2010) ---
     * added help message (--help flag)
     * made it so that --escape/--noescape and --color/--nocolor are mutually exclusive
