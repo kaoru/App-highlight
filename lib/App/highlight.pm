@@ -59,6 +59,9 @@ sub validate_args {
             $self->opt_spec(),
         );
         print $usage;
+        print "\n";
+        print "For more detailed help see 'perldoc App::highlight'\n";
+        print "\n";
         exit;
     }
 
