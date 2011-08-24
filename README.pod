@@ -59,7 +59,7 @@ App::highlight will cycle through the colours:
 If you do not have Term::ANSIColor installed and you specify --color or you do
 not specify --no-color then you will receive a warning.
 
-=head2 no-color
+=head2 no-color / C
 
 This is the default if Term::ANSIColor is not installed.
 
@@ -83,7 +83,7 @@ that no special characters exist.
     quux
     <<c>>org<<e>>
 
-=head2 noescape / no-escape / n / regex / r
+=head2 no-escape / n / regex / r
 
 This allows you to specify a regular expression instead of a simple
 string.
@@ -127,6 +127,27 @@ would expect.
     <<qu>>x
     <<qu>>ux
     corge
+
+=head2 show-bad-spaces / b
+
+With this option turned on whitespace characters which appear at the end of
+lines are colored red.
+
+For users familiar with git, this is replicating the default behaviour of "git
+diff".
+
+In non-color mode whitespace characters which appear at the end of lines are
+filled in with capital "X" characters instead.
+
+    % cat words_with_spaces | highlight --show-bad-spaces
+    test
+    test with spaces
+    test with spaces on the endXXXX
+    just spaces on the next line
+    XXXXXXXX
+    empty line next
+
+    end of test
 
 =head2 help / h
 
