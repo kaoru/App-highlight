@@ -33,14 +33,14 @@ sub opt_spec {
     return (
         [
             one_of => [
-                [ 'color|c'          => "use terminal color for highlighting (default)" ],
-                [ 'nocolor|no-color' => "don't use terminal color"                      ],
+                [ 'color|c'    => "use terminal color for highlighting (default)" ],
+                [ 'no-color|C' => "don't use terminal color"                      ],
             ],
         ],
         [
             one_of => [
-                [ 'escape|e'                     => "auto-escape input (default)"          ],
-                [ 'noescape|no-escape|regex|n|r' => "don't auto-escape input (regex mode)" ],
+                [ 'escape|e'            => "auto-escape input (default)"          ],
+                [ 'no-escape|regex|n|r' => "don't auto-escape input (regex mode)" ],
             ]
         ],
         [ 'full-line|l'       => "highlight the whole matched line"     ],
@@ -77,7 +77,7 @@ sub execute {
 
     my @matches;
     if (scalar @$args) {
-        if ($opt->{'escape'} || !$opt->{'noescape'}) {
+        if ($opt->{'escape'} || !$opt->{'no_escape'}) {
             @$args = map { "\Q$_" } @$args;
         }
         @matches = @$args;
@@ -85,7 +85,7 @@ sub execute {
 
     my @HIGHLIGHTS;
     if ($COLOR_SUPPORT &&
-        ($opt->{'color'} || !$opt->{'nocolor'})) {
+        ($opt->{'color'} || !$opt->{'no_color'})) {
         @HIGHLIGHTS = @COLORS;
     }
     else {
@@ -93,7 +93,7 @@ sub execute {
     }
 
     if (!$COLOR_SUPPORT &&
-        ($opt->{'color'} || !$opt->{'nocolor'})) {
+        ($opt->{'color'} || !$opt->{'no_color'})) {
         warn "Color support disabled. Install Term::ANSIColor to enable it.\n";
     }
 
@@ -119,7 +119,7 @@ sub execute {
         }
 
         if ($opt->{'show_bad_spaces'}) {
-            if ($opt->{'color'} || !$opt->{'nocolor'}) {
+            if ($opt->{'color'} || !$opt->{'no_color'}) {
                 s{(\s+)(?=$/)$}{colored($1, "white on_red")}e;
                 #s{(\s+)(?=$/)$}{"[start-red]" . $1 . "[end-red]"}e;
             }
@@ -199,7 +199,7 @@ App::highlight will cycle through the colours:
 If you do not have Term::ANSIColor installed and you specify --color or you do
 not specify --no-color then you will receive a warning.
 
-=head2 no-color
+=head2 no-color / C
 
 This is the default if Term::ANSIColor is not installed.
 
@@ -223,7 +223,7 @@ that no special characters exist.
     quux
     <<c>>org<<e>>
 
-=head2 noescape / no-escape / n / regex / r
+=head2 no-escape / n / regex / r
 
 This allows you to specify a regular expression instead of a simple
 string.
