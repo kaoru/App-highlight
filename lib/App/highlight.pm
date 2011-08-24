@@ -11,7 +11,7 @@ use Getopt::Long::Descriptive;
 my $COLOR_SUPPORT = 1;
 my @COLORS;
 try {
-    load('Term::ANSIColor', 'color');
+    load('Term::ANSIColor', 'color', 'colored');
     @COLORS = map { [ color("bold $_"), color('reset') ] } (
         qw(red green yellow blue magenta cyan)
     );
@@ -43,9 +43,10 @@ sub opt_spec {
                 [ 'noescape|no-escape|regex|n|r' => "don't auto-escape input (regex mode)" ],
             ]
         ],
-        [ 'full-line|l' => "highlight the whole matched line"   ],
-        [ 'one-color|o' => "use only one color for all matches" ],
-        [ 'help|h'      => "display a usage message"            ],
+        [ 'full-line|l'       => "highlight the whole matched line"     ],
+        [ 'one-color|o'       => "use only one color for all matches"   ],
+        [ 'show-bad-spaces|b' => "highlight spaces at the end of lines" ],
+        [ 'help|h'            => "display a usage message"              ],
     );
 }
 
@@ -61,7 +62,7 @@ sub validate_args {
         exit;
     }
 
-    if (!@$args) {
+    if (!@$args && !$opt->{'show_bad_spaces'}) {
         $self->usage_error(
             "No arguments given!\n" .
             "What do you want me to highlight?\n"
@@ -116,6 +117,17 @@ sub execute {
             $i++;
             $i %= @HIGHLIGHTS;
         }
+
+        if ($opt->{'show_bad_spaces'}) {
+            if ($opt->{'color'} || !$opt->{'nocolor'}) {
+                s{(\s+)(?=$/)$}{colored($1, "white on_red")}e;
+                #s{(\s+)(?=$/)$}{"[start-red]" . $1 . "[end-red]"}e;
+            }
+            else {
+                s{(\s+)(?=$/)$}{"X" x length($1)}e;
+            }
+        }
+
         print;
     }
 
@@ -255,6 +267,27 @@ would expect.
     <<qu>>x
     <<qu>>ux
     corge
+
+=head2 show-bad-spaces / b
+
+With this option turned on whitespace characters which appear at the end of
+lines are colored red.
+
+For users familiar with git, this is replicating the default behaviour of "git
+diff".
+
+In non-color mode whitespace characters which appear at the end of lines are
+filled in with capital "X" characters instead.
+
+    % cat words_with_spaces | highlight --show-bad-spaces
+    test
+    test with spaces
+    test with spaces on the endXXXX
+    just spaces on the next line
+    XXXXXXXX
+    empty line next
+
+    end of test
 
 =head2 help / h
 

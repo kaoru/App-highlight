@@ -13,9 +13,11 @@ use File::Spec;
 my $real_stdin;
 
 sub open_words_txt_as_stdin {
+    my $file = shift // 'words.txt';
+
     my $words_txt = File::Spec->catfile(
         dirname(dirname(__FILE__)),
-        'words.txt'
+        $file
     );
 
     $real_stdin = *STDIN;
