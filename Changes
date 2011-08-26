@@ -1,3 +1,7 @@
+--- 0.08 (26/8/2011) ---
+    * removed accidental use of "//" in tests
+      - want to support 5.8.8 still :-)
+
 --- 0.07 (23/8/2011) ---
     * added new option --show-bad-spaces (-b)
       - similar to the behaviour of "git diff"
