@@ -107,7 +107,12 @@ sub execute {
 
     my $ignore_case = '';
     if ($opt->{'ignore_case'}) {
-        $ignore_case = '(?^i)';
+        if ($^V lt v5.14.0) {
+            $ignore_case = '(?i)';
+        }
+        else {
+            $ignore_case = '(?^i)';
+        }
     }
 
     while (<STDIN>) {
