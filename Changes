@@ -1,3 +1,9 @@
+--- 0.09 (27/1/2013) ---
+    * Added --ignore-case (-i) mode
+    * Added tests for the --ignore-case mode
+    * (Hopefully) made sure that the --ignore-case mode is backwards compatible
+      back to Perl 5.8.8 by using $^V.
+
 --- 0.08 (26/8/2011) ---
     * removed accidental use of "//" in tests
       - want to support 5.8.8 still :-)
