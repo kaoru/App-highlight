@@ -32,7 +32,6 @@ use App::highlight;
 
     is($result->error, undef, 'threw no exceptions');
 
-
     restore_stdin();
 }
 
