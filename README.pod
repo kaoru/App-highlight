@@ -1,3 +1,9 @@
+=begin html
+
+<a href="https://travis-ci.org/kaoru/App-highlight"><img src="https://travis-ci.org/kaoru/App-highlight.png" /></a>
+
+=end html
+
 =head1 NAME
 
 App::highlight - simple grep-like highlighter app
