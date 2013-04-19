@@ -11,7 +11,8 @@ branches:
 
 before_install:
    # Prevent "Please tell me who you are" errors for certain DZIL configs
-   - git config --global user.name "TravisCI"
+   - git config --global user.name "kaoru"
+
 install:
    # Deal with all of the DZIL dependancies, quickly and quietly
    - cpanm --quiet --notest --skip-satisfied Dist::Zilla
@@ -19,5 +20,6 @@ install:
 
    - export RELEASE_TESTING=1 AUTOMATED_TESTING=1 AUTHOR_TESTING=1 HARNESS_OPTIONS=j10:c HARNESS_TIMER=1
    - dzil listdeps | grep -vP '[^\w:]' | cpanm --verbose
+
 script:
    - dzil smoke --release --author
