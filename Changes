@@ -1,0 +1,45 @@
+--- 0.09 (27/1/2013) ---
+    * Added --ignore-case (-i) mode
+    * Added tests for the --ignore-case mode
+    * (Hopefully) made sure that the --ignore-case mode is backwards compatible
+      back to Perl 5.8.8 by using $^V.
+
+--- 0.08 (26/8/2011) ---
+    * removed accidental use of "//" in tests
+      - want to support 5.8.8 still :-)
+
+--- 0.07 (23/8/2011) ---
+    * added new option --show-bad-spaces (-b)
+      - similar to the behaviour of "git diff"
+    * changed the shorthands and names of some options
+    * added "see POD for more info" message to --help output
+    * added more tests
+
+--- 0.06 (6/12/2010) ---
+    * fixed typo in prerequisites
+
+--- 0.05 (5/12/2010) ---
+    * added help message (--help flag)
+    * made it so that --escape/--noescape and --color/--nocolor are mutually exclusive
+
+--- 0.04 (5/12/2010) ---
+    * added support for --no-color
+    * made --no-color the default when Term::ANSIColor is not installed
+    * removed Term::ANSIColor as a required module
+    * changed --color and --escape parameters to allow positive and negative forms
+    * split tests up into smaller files
+
+--- 0.03 (2/12/2010) ---
+    * added explicit module versions to combat failing test
+    http://www.cpantesters.org/cpan/report/c52b1b66-fd4f-11df-94a1-c5f5cbcffce0
+
+--- 0.02 (29/11/2010) ---
+    * added the --one-color parameter
+    * more tests
+
+--- 0.01 (28/11/2010) ---
+    * basic highlight functionality
+    * --no-escape
+    * --full-line
+    * some POD
+    * compile test
