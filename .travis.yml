@@ -5,6 +5,10 @@ perl:
    - "5.12"
    - "5.10"
 
+branches:
+  only:
+    - /^build/
+
 before_install:
    # Prevent "Please tell me who you are" errors for certain DZIL configs
    - git config --global user.name "TravisCI"
