@@ -1,7 +1,7 @@
 
 
 This archive contains the distribution App-highlight,
-version 0.09:
+version 0.10:
 
   A simple grep-like filter that highlights chosen words or lines rather than removing non-filtered lines.
 
