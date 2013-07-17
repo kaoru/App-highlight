@@ -18,6 +18,7 @@ t/04-full-line.t
 t/05-nocolors.t
 t/06-show-bad-spaces.t
 t/07-ignore-case.t
+t/88-version.t
 t/99-help.t
 t/Test/AppHighlightWords.pm
 t/release-pod-syntax.t

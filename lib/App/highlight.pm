@@ -3,7 +3,7 @@ use warnings;
 
 package App::highlight;
 {
-  $App::highlight::VERSION = '0.10';
+  $App::highlight::VERSION = '0.12';
 }
 use base 'App::Cmd::Simple';
 
@@ -50,6 +50,7 @@ sub opt_spec {
         [ 'full-line|l'       => "highlight the whole matched line"     ],
         [ 'one-color|o'       => "use only one color for all matches"   ],
         [ 'show-bad-spaces|b' => "highlight spaces at the end of lines" ],
+        [ 'version|v'         => "show version number"                  ],
         [ 'help|h'            => "display a usage message"              ],
     );
 }
@@ -66,6 +67,10 @@ sub validate_args {
         print "\n";
         print "For more detailed help see 'perldoc App::highlight'\n";
         print "\n";
+        exit;
+    }
+    elsif ($opt->{'version'}) {
+        print $App::highlight::VERSION, "\n";
         exit;
     }
 
@@ -85,7 +90,7 @@ sub execute {
     my @matches;
     if (scalar @$args) {
         if ($opt->{'escape'} || !$opt->{'no_escape'}) {
-            @$args = map { "\Q$_" } @$args;
+            @$args = map { "\Q$_" } grep { defined } @$args;
         }
         @matches = @$args;
     }
@@ -161,9 +166,15 @@ App::highlight - simple grep-like highlighter app
 
 =head1 VERSION
 
-version 0.10
+version 0.12
 
 =head1 SYNOPSIS
+
+=begin html
+
+<a href="https://travis-ci.org/kaoru/App-highlight"><img src="https://travis-ci.org/kaoru/App-highlight.png" /></a>
+
+=end html
 
 highlight is similar to grep, except that instead of removing
 non-matched lines it simply highlights words or lines which are
@@ -257,6 +268,18 @@ string.
     [[q]][[u]][[u]][[x]]
     corge
 
+=head2 ignore-case / i
+
+This allows you to match case insensitively.
+
+    % cat words.txt | highlight --ignore-case 'BAZ' 'QuUx'
+    foo
+    bar
+    <<baz>>
+    qux
+    [[quux]]
+    corge
+
 =head2 full-line / l
 
 This makes highlight always highlight full lines of input, even when
@@ -309,6 +332,12 @@ filled in with capital "X" characters instead.
     empty line next
 
     end of test
+
+=head2 version / v
+
+Show the current version number
+
+    % highlight --version
 
 =head2 help / h
 

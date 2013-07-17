@@ -1,14 +1,14 @@
-=begin html
-
-<a href="https://travis-ci.org/kaoru/App-highlight"><img src="https://travis-ci.org/kaoru/App-highlight.png" /></a>
-
-=end html
-
 =head1 NAME
 
 App::highlight - simple grep-like highlighter app
 
 =head1 SYNOPSIS
+
+=begin html
+
+<a href="https://travis-ci.org/kaoru/App-highlight"><img src="https://travis-ci.org/kaoru/App-highlight.png" /></a>
+
+=end html
 
 highlight is similar to grep, except that instead of removing
 non-matched lines it simply highlights words or lines which are
@@ -102,6 +102,18 @@ string.
     [[q]][[u]][[u]][[x]]
     corge
 
+=head2 ignore-case / i
+
+This allows you to match case insensitively.
+
+    % cat words.txt | highlight --ignore-case 'BAZ' 'QuUx'
+    foo
+    bar
+    <<baz>>
+    qux
+    [[quux]]
+    corge
+
 =head2 full-line / l
 
 This makes highlight always highlight full lines of input, even when
@@ -154,6 +166,12 @@ filled in with capital "X" characters instead.
     empty line next
 
     end of test
+
+=head2 version / v
+
+Show the current version number
+
+    % highlight --version
 
 =head2 help / h
 
