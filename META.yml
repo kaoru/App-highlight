@@ -23,4 +23,4 @@ requires:
   Try::Tiny: 0.09
 resources:
   repository: git://github.com/kaoru/App-highlight.git
-version: 0.10
+version: 0.11

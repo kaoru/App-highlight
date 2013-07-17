@@ -3,7 +3,7 @@ use warnings;
 
 package App::highlight;
 {
-  $App::highlight::VERSION = '0.10';
+  $App::highlight::VERSION = '0.11';
 }
 use base 'App::Cmd::Simple';
 
@@ -85,7 +85,7 @@ sub execute {
     my @matches;
     if (scalar @$args) {
         if ($opt->{'escape'} || !$opt->{'no_escape'}) {
-            @$args = map { "\Q$_" } @$args;
+            @$args = map { "\Q$_" } grep { defined } @$args;
         }
         @matches = @$args;
     }
@@ -161,7 +161,7 @@ App::highlight - simple grep-like highlighter app
 
 =head1 VERSION
 
-version 0.10
+version 0.11
 
 =head1 SYNOPSIS
 
@@ -255,6 +255,18 @@ string.
     <<ba>>z
     [[q]][[u]][[x]]
     [[q]][[u]][[u]][[x]]
+    corge
+
+=head2 ignore-case / i
+
+This allows you to match case insensitively.
+
+    % cat words.txt | highlight --ignore-case 'BAZ' 'QuUx'
+    foo
+    bar
+    <<baz>>
+    qux
+    [[quux]]
     corge
 
 =head2 full-line / l
