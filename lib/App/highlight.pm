@@ -158,6 +158,12 @@ App::highlight - simple grep-like highlighter app
 
 =head1 SYNOPSIS
 
+=begin html
+
+<a href="https://travis-ci.org/kaoru/App-highlight"><img src="https://travis-ci.org/kaoru/App-highlight.png" /></a>
+
+=end html
+
 highlight is similar to grep, except that instead of removing
 non-matched lines it simply highlights words or lines which are
 matched.
