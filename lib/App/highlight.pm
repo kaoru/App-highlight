@@ -70,7 +70,7 @@ sub validate_args {
         exit;
     }
     elsif ($opt->{'version'}) {
-        print $App::highlight::VERSION;
+        print $App::highlight::VERSION, "\n";
         exit;
     }
 
