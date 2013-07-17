@@ -250,6 +250,18 @@ string.
     [[q]][[u]][[u]][[x]]
     corge
 
+=head2 ignore-case / i
+
+This allows you to match case insensitively.
+
+    % cat words.txt | highlight --ignore-case 'BAZ' 'QuUx'
+    foo
+    bar
+    <<baz>>
+    qux
+    [[quux]]
+    corge
+
 =head2 full-line / l
 
 This makes highlight always highlight full lines of input, even when
