@@ -50,6 +50,7 @@ sub opt_spec {
         [ 'full-line|l'       => "highlight the whole matched line"     ],
         [ 'one-color|o'       => "use only one color for all matches"   ],
         [ 'show-bad-spaces|b' => "highlight spaces at the end of lines" ],
+        [ 'version|v'         => "show version number"                  ],
         [ 'help|h'            => "display a usage message"              ],
     );
 }
@@ -66,6 +67,10 @@ sub validate_args {
         print "\n";
         print "For more detailed help see 'perldoc App::highlight'\n";
         print "\n";
+        exit;
+    }
+    elsif ($opt->{'version'}) {
+        print $App::highlight::VERSION;
         exit;
     }
 
@@ -327,6 +332,12 @@ filled in with capital "X" characters instead.
     empty line next
 
     end of test
+
+=head2 version / v
+
+Show the current version number
+
+    % highlight --version
 
 =head2 help / h
 

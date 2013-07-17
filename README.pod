@@ -167,6 +167,12 @@ filled in with capital "X" characters instead.
 
     end of test
 
+=head2 version / v
+
+Show the current version number
+
+    % highlight --version
+
 =head2 help / h
 
 Show a brief help message
