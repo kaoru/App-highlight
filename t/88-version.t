@@ -4,7 +4,7 @@ use warnings;
 use File::Basename;
 use lib dirname(__FILE__);
 
-use Test::More tests => 2;
+use Test::More tests => 1;
 use App::Cmd::Tester;
 use Test::AppHighlightWords;
 
@@ -19,8 +19,4 @@ use App::highlight;
         qr/$App::highlight::VERSION/ms,
         "highlight --version => $App::highlight::VERSION"
     );
-
-    is($result->error, undef, 'threw no exceptions');
-
-    restore_stdin();
 }
