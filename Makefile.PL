@@ -24,6 +24,7 @@ my %WriteMakefileArgs = (
   "PREREQ_PM" => {
     "App::Cmd::Simple" => "0.309",
     "ExtUtils::MakeMaker" => "6.55_02",
+    "Getopt::Long" => "2.39",
     "Getopt::Long::Descriptive" => "0.085",
     "Module::Load" => "0.18",
     "Try::Tiny" => "0.09"
