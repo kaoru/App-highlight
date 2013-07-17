@@ -82,7 +82,7 @@ sub execute {
     my @matches;
     if (scalar @$args) {
         if ($opt->{'escape'} || !$opt->{'no_escape'}) {
-            @$args = map { "\Q$_" } @$args;
+            @$args = map { "\Q$_" } grep { defined } @$args;
         }
         @matches = @$args;
     }
