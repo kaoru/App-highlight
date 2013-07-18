@@ -1,7 +1,9 @@
 Revision history for perl module App::highlight
 
-0.13 2013-
+0.13 2013-07-18
     * Reformatted this file to conform to CPAN::Changes::Spec
+    * Added Test::CPAN::Changes test
+    * Thanks Neil Bowers for the patch and pull request
 
 0.12 2013-07-17
     * Added --version flag
