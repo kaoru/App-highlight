@@ -1,18 +1,3 @@
-.build/32CH4zve0V/.build/3Qq1bRRJxE/.travis.yml
-.build/32CH4zve0V/.build/pmOtrj6Zfu/.build/3Qq1bRRJxE/.travis.yml
-.build/32CH4zve0V/.build/pmOtrj6Zfu/.travis.yml
-.build/32CH4zve0V/.travis.yml
-.build/3Qq1bRRJxE/.travis.yml
-.build/4V4zj2oKko/.build/32CH4zve0V/.build/3Qq1bRRJxE/.travis.yml
-.build/4V4zj2oKko/.build/32CH4zve0V/.build/pmOtrj6Zfu/.build/3Qq1bRRJxE/.travis.yml
-.build/4V4zj2oKko/.build/32CH4zve0V/.build/pmOtrj6Zfu/.travis.yml
-.build/4V4zj2oKko/.build/32CH4zve0V/.travis.yml
-.build/4V4zj2oKko/.build/3Qq1bRRJxE/.travis.yml
-.build/4V4zj2oKko/.build/pmOtrj6Zfu/.build/3Qq1bRRJxE/.travis.yml
-.build/4V4zj2oKko/.build/pmOtrj6Zfu/.travis.yml
-.build/4V4zj2oKko/.travis.yml
-.build/pmOtrj6Zfu/.build/3Qq1bRRJxE/.travis.yml
-.build/pmOtrj6Zfu/.travis.yml
 .travis.yml
 Changes
 LICENSE
@@ -36,6 +21,7 @@ t/07-ignore-case.t
 t/88-version.t
 t/99-help.t
 t/Test/AppHighlightWords.pm
+t/release-cpan-changes.t
 t/release-pod-syntax.t
 t/words.txt
 t/words_with_capitals.txt

@@ -21,6 +21,7 @@
       },
       "develop" : {
          "requires" : {
+            "Test::CPAN::Changes" : "0.19",
             "Test::Pod" : "1.41"
          }
       },
@@ -50,6 +51,6 @@
          "web" : "http://github.com/kaoru/App-highlight"
       }
    },
-   "version" : "0.12"
+   "version" : "0.13"
 }
 

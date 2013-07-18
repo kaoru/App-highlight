@@ -3,7 +3,7 @@ use warnings;
 
 package App::highlight;
 {
-  $App::highlight::VERSION = '0.12';
+  $App::highlight::VERSION = '0.13';
 }
 use base 'App::Cmd::Simple';
 
@@ -166,7 +166,7 @@ App::highlight - simple grep-like highlighter app
 
 =head1 VERSION
 
-version 0.12
+version 0.13
 
 =head1 SYNOPSIS
 
