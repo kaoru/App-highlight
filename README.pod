@@ -52,6 +52,9 @@ using terminal colors rather than using brackets.
 
 Installing color support by installing Term::ANSIColor is highly reccommended.
 
+To get color support on Microsoft Windows you should install Term::ANSIColor
+and Win32::Console::ANSI.
+
 =head1 OPTIONS
 
 =head2 color / c
@@ -186,5 +189,7 @@ Copyright (C) 2010 Alex Balhatchet
 =head1 Author
 
 Alex Balhatchet (kaoru@slackwise.net)
+
+Windows support patch from Github user aero.
 
 =cut
