@@ -1,5 +1,9 @@
 Revision history for perl module App::highlight
 
+0.14 2013-08-17
+    * Added Windows suppot via Win32::Console::ANSI
+    * Added thanks to Github user aero for Windows patch
+
 0.13 2013-07-18
     * Reformatted this file to conform to CPAN::Changes::Spec
     * Added Test::CPAN::Changes test
