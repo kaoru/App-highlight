@@ -13,8 +13,21 @@ use Getopt::Long::Descriptive;
 
 my $COLOR_SUPPORT = 1;
 my @COLORS;
+
+my %COLOR_MODULES = (
+    'Term::ANSIColor' => [ 'color', 'colored' ],
+);
+
+# windows support
+if ($^O eq 'MSWin32') {
+    $COLOR_MODULES{'Win32::Console::ANSI'} = [];
+}
+
 try {
-    load('Term::ANSIColor', 'color', 'colored');
+    for my $module (sort keys %COLOR_MODULES) {
+        load($module, @{ $COLOR_MODULES{$module} });
+    }
+
     @COLORS = map { [ color("bold $_"), color('reset') ] } (
         qw(red green yellow blue magenta cyan)
     );
@@ -106,7 +119,8 @@ sub execute {
 
     if (!$COLOR_SUPPORT &&
         ($opt->{'color'} || !$opt->{'no_color'})) {
-        warn "Color support disabled. Install Term::ANSIColor to enable it.\n";
+        my $mod_msg = join(' and ', sort keys %COLOR_MODULES);
+        warn "Color support disabled. Install $mod_msg to enable it.\n";
     }
 
     if ($opt->{'one_color'}) {
@@ -217,6 +231,9 @@ If you have Term::ANSIColor installed then the strings will be highlighted
 using terminal colors rather than using brackets.
 
 Installing color support by installing Term::ANSIColor is highly reccommended.
+
+To get color support on Microsoft Windows you should install Term::ANSIColor
+and Win32::Console::ANSI.
 
 =head1 OPTIONS
 
