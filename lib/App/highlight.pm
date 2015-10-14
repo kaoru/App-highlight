@@ -2,9 +2,7 @@ use strict;
 use warnings;
 
 package App::highlight;
-{
-  $App::highlight::VERSION = '0.14';
-}
+$App::highlight::VERSION = '0.14';
 use base 'App::Cmd::Simple';
 
 use Try::Tiny;

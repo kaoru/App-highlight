@@ -1,5 +1,7 @@
 language: perl
 perl:
+   - "5.20"
+   - "5.18"
    - "5.16"
    - "5.14"
    - "5.12"
@@ -12,3 +14,6 @@ branches:
 before_install:
    # Prevent "Please tell me who you are" errors for certain DZIL configs
    - git config --global user.name "kaoru"
+
+# Use new container-based infrastructure by declaring that we don't need sudo
+sudo: false
